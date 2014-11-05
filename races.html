@@ -206,41 +206,44 @@
   var map;
 
   var set_race = function(race, map) {
-    $.getJSON('race-data/' + race + '.json', function(data) {
-      map.removePolygons();
-      map.removePolylines();
+    map.removePolygons();
+    map.removePolylines();
+    colors = new Palette();
 
-      colors = new Palette();
-      _.each(data.features, function(feature) {
-        if(typeof feature.properties !== "undefined") {
-          var stroke = tinycolor(colors.get(feature.properties.winner.candidate, feature.properties.winner.party));
-          var fill = tinycolor(colors.get(feature.properties.winner.candidate, feature.properties.winner.party));
-
-          map.drawPolygon({
-            paths: feature.geometry.coordinates,
-            useGeoJSON: true,
-            strokeColor: stroke.darken(15).toHexString(),
-            strokeOpacity: 0.75,
-            strokeWeight: 1,
-            fillColor: fill.toHexString(),
-            fillOpacity: 0.4,
-            mouseover: function() {
-              var data = {
-                precinct: feature.properties.precinct,
-                results: feature.properties.races
+    if(race === 'rail') {
+      $.getJSON('race-data/rail.json', function(data) {
+        _.each(data.features, function(feature) {
+          if(typeof feature.properties !== "undefined") {
+            var votes_for = 0;
+            var total_votes = 0;
+            _.each(feature.properties.races, function(opt) {
+              if(opt.candidate === "For") {
+                votes_for += opt.votes;
               }
-              $('#key').find('.panel-body').html(legend(data));
-              $('#key').find('#number').text(feature.properties.precinct + ' ');
-              $('#key:hidden').show();
-            },
-            mouseout: function() {
-              $('#key').hide();
-            }
-          });
-        }
-      });
-
-      if(race === 'rail') {
+              total_votes += opt.votes;
+            });
+            map.drawPolygon({
+              paths: feature.geometry.coordinates,
+              useGeoJSON: true,
+              strokeWeight: 0,
+              fillColor: '#3A56E0',
+              fillOpacity: (votes_for / total_votes) * 1.25,
+              mouseover: function() {
+                var data = {
+                  precinct: feature.properties.precinct,
+                  results: feature.properties.races
+                }
+                $('#key').find('.panel-body').html(legend(data));
+                $('#key').find('#number').text(feature.properties.precinct + ' ');
+                $('#key:hidden').show();
+              },
+              mouseout: function() {
+                $('#key').hide();
+              }
+            });
+          }
+        });
+        $('#legend').find('.panel-body').append("<div class='legend-item'><div class='color' style='background-color:#3A56E0;border-color:#3A56E0;'></div>Votes for rail <small>(darker precincts indicate higher support)</small></div></div>");
         // Draw the proposed rail line
         $.getJSON('rail-routes/new.json', function(data) {
           var rail_line = data.features[0].geometry.coordinates;
@@ -255,9 +258,41 @@
           });
           $('#legend').find('.panel-body').append("<div class='legend-item'><div class='color' style='background-color:#B72B21;border-color:#B7B21;'></div>Proposed rail line</div></div>");
         });
-      }
+      });
+    }
 
-    });
+    else {
+      $.getJSON('race-data/' + race + '.json', function(data) {
+        _.each(data.features, function(feature) {
+          if(typeof feature.properties !== "undefined") {
+            var stroke = tinycolor(colors.get(feature.properties.winner.candidate, feature.properties.winner.party));
+            var fill = tinycolor(colors.get(feature.properties.winner.candidate, feature.properties.winner.party));
+
+            map.drawPolygon({
+              paths: feature.geometry.coordinates,
+              useGeoJSON: true,
+              strokeColor: stroke.darken(15).toHexString(),
+              strokeOpacity: 0.75,
+              strokeWeight: 1,
+              fillColor: fill.toHexString(),
+              fillOpacity: 0.4,
+              mouseover: function() {
+                var data = {
+                  precinct: feature.properties.precinct,
+                  results: feature.properties.races
+                }
+                $('#key').find('.panel-body').html(legend(data));
+                $('#key').find('#number').text(feature.properties.precinct + ' ');
+                $('#key:hidden').show();
+              },
+              mouseout: function() {
+                $('#key').hide();
+              }
+            });
+          }
+        });
+      });
+    }
   };
 
   $(function() {
@@ -293,6 +328,7 @@
       }
       var zoom = $(this).find(':selected').attr('data-zoom');
       if(typeof zoom !== "undefined") {
+        console.log(parseInt(zoom, 10));
         map.setZoom(zoom_default + parseInt(zoom, 10));
       }
       else {
