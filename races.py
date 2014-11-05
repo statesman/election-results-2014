@@ -74,6 +74,7 @@ build_race_file("LIEUTENANT GOVERNOR", 'lt-governor')
 build_race_file("ATTORNEY GENERAL", 'attorney-general')
 
 build_race_file("MAYOR, CITY OF AUSTIN", 'mayor')
+build_race_file("PROPOSITION, CITY OF AUSTIN", 'rail')
 build_race_file("DISTRICT 1, AUSTIN CITY COUNCIL, CITY OF AUSTIN", 'council-d1')
 build_race_file("DISTRICT 2, AUSTIN CITY COUNCIL, CITY OF AUSTIN", 'council-d2')
 build_race_file("DISTRICT 3, AUSTIN CITY COUNCIL, CITY OF AUSTIN", 'council-d3')
