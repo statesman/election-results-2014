@@ -1,0 +1,22 @@
+{
+  "name": "turnout-map",
+  "version": "0.0.0",
+  "authors": [
+    "Andrew Chavez <adchavez@gmail.com>"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.0",
+    "gmaps": "~0.4.15",
+    "underscore": "~1.7.0",
+    "tinycolor": "~1.1.0",
+    "handlebars": "~2.0.0"
+  }
+}

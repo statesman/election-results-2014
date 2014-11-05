@@ -1,0 +1,34 @@
+<div id="map" style="width:100%;height:650px;"></div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.12/gmaps.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+<script>
+var map;
+  $(function() {
+    $.getJSON('data.json', function(data) {
+      map = new GMaps({
+        div: '#map',
+        lat: 30.2500,
+        lng: -97.7500,
+        zoom: 11,
+        mapType: 'terrain'
+      });
+      _.each(data.features, function(feature) {
+        map.drawPolygon({
+          paths: feature.geometry.coordinates,
+          useGeoJSON: true,
+          strokeColor: '#3c8ab8',
+          strokeOpacity: feature.properties.percent * 1.25,
+          strokeWeight: 1.5,
+          fillColor: '#3c8ab8',
+          fillOpacity: feature.properties.percent * 1.3,
+          title: feature.properties.precinct,
+          mouseover: function() {
+            console.log(feature.properties.precinct);
+          }
+        });
+      });
+    })
+  });
+</script>
