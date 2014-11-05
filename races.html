@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Precinct-by-precinct vote totals</title>
+  <link rel="icon" type="image/png" href="//projects.statesman.com/common/favicon.ico">
 
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
@@ -73,7 +74,6 @@
         <div class="form-group">
           <label for="race" class="control-label">Choose a race:</label>
           <select class="form-control" id="race">
-            <option value="none">- Select a race -</option>
             <optgroup label="State offices">
               <option value="governor">Governor</option>
               <option value="lt-governor">Lt. Governor</option>
@@ -253,6 +253,7 @@
       lng: center_default[1],
       zoom: zoom_default
     });
+    set_race('governor', map);
 
     $('#race').change(function() {
       var race = $(this).val();
