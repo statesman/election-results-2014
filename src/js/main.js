@@ -107,14 +107,7 @@
 
     $('#race').change(function() {
       var race = $(this).val();
-      if(race === 'none') {
-        map.removePolygons();
-        map.setCenter(center_default[0], center_default[1]);
-        map.setZoom(zoom_default);
-      }
-      else {
-        set_race(race, map);
-      }
+      set_race(race, map);
       var center = $(this).find(':selected').attr('data-center');
       if(typeof center !== "undefined") {
         center = center.split(',');

@@ -48,12 +48,12 @@
           <label for="race" class="control-label">Choose a race:</label>
           <select class="form-control" id="race">
             <optgroup label="State offices">
-              <option value="governor">Governor</option>
-              <option value="lt-governor">Lt. Governor</option>
-              <option value="attorney-general">Attorney General</option>
+              <option data-zoom="-1" value="governor">Governor</option>
+              <option data-zoom="-1" value="lt-governor">Lt. Governor</option>
+              <option data-zoom="-1" value="attorney-general">Attorney General</option>
             </optgroup>
             <optgroup label="U.S. Senator">
-              <option value="senate">U.S. Senator</option>
+              <option data-zoom="-1" value="senate">U.S. Senator</option>
             </optgroup>
             <optgroup label="U.S. Representative">
               <option value="us-rep-10" data-center="30.341302420968095,-97.64940643310548">District 10</option>
