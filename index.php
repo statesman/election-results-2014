@@ -102,7 +102,7 @@
         </div>
       </div>
       <div class="col-xs-12 col-sm-8">
-        <div id="map" style="width:100%;height:700px;"></div>
+        <div id="map" style="width:100%;min-height:350px;"></div>
         <div class="hidden-sm hidden-md hidden-lg">
           <p><small>Presentation: Andrew Chavez and Christian McDonald, Austin American-Statesman</small></p>
           <p><small>Data source: Travis County Clerk, Elections Division</small></p>

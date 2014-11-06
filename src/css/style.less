@@ -3,6 +3,18 @@
 // ... and then decorate it with TCU 360 styles
 @import 'custom-bootstrap/variables.less';
 
+/* Map */
+#map {
+  margin-bottom: 10px;
+  @media (min-width: @screen-sm-min) {
+    height:500px;
+    margin-bottom: 0;
+  }
+  @media (min-width: @screen-md-min) {
+    height:700px;
+  }
+}
+
 /* Navbar */
 .navbar-brand img {
   height: 26px;
