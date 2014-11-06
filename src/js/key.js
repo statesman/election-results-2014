@@ -1,12 +1,11 @@
-var Key = (function($, Handlebars) {
+var Key = (function($, JST) {
 
   function Key(el) {
     this.$el = $(el);
-    this.template = Handlebars.compile($("#key-item-template").html());
   }
 
   Key.prototype.add = function(data) {
-    this.$el.append(this.template(data));
+    this.$el.append(JST.key_item(data));
   };
 
   Key.prototype.reset = function() {
@@ -15,4 +14,4 @@ var Key = (function($, Handlebars) {
 
   return Key;
 
-}(jQuery, Handlebars));
+}(jQuery, JST));

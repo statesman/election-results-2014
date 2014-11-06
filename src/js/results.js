@@ -1,4 +1,4 @@
-var Results = (function($, Handlebars, _, numeral) {
+var Results = (function($, JST, _, numeral) {
 
   var race_value = function(part, whole) {
     if(whole === 0) {
@@ -11,13 +11,12 @@ var Results = (function($, Handlebars, _, numeral) {
 
   function Results(el) {
     this.$el = $(el);
-    this.template = Handlebars.compile($("#results-template").html());
-    this.$el.html(this.template());
+    this.$el.html(JST.results());
   }
 
   // Show the precinct result instructions
   Results.prototype.showDefault = function() {
-    this.$el.html(this.template());
+    this.$el.html(JST.results());
   };
 
   // Update the key with new data
@@ -56,9 +55,9 @@ var Results = (function($, Handlebars, _, numeral) {
         "sum_vap": numeral(data.SUM_VAP).format('0,0')
       };
     }
-    this.$el.html(this.template(data));
+    this.$el.html(JST.results(data));
   };
 
   return Results;
 
-}(jQuery, Handlebars, _, numeral));
+}(jQuery, JST, _, numeral));
