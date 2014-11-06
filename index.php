@@ -141,7 +141,7 @@
     {{#if PCT}}{{#if demos}}
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Precinct {{PCT}} demographics</h3>
+          <h3 class="panel-title">Precinct {{PCT}} 2010 demographics</h3>
         </div>
         <div class="panel-body">
           {{#if PCT}}
