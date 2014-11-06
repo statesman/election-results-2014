@@ -1,47 +1,15 @@
-function Palette() {
-  this.colors = [
-    '#1E8A0E',
-    '#1E44A8',
-    '#FFCC00',
-    '#FF6600',
-    '#4D1979'
-  ];
-  this.partycolors = {
-    'REP': '#B72B21',
-    'LIB': '#E0C828',
-    'DEM': '#1E44A8',
-    'GRN': '#1E8A0E'
-  };
-  this.nextColor = 0;
-  this.candidates = {};
-  $('#legend').show();
-  $('#legend').find('.panel-body').empty();
-}
-Palette.prototype.set = function(candidate, color) {
-  this.candidates[candidate] = color;
-  $('#legend').find('.panel-body').append("<div class='legend-item'><div class='color' style='background-color:" + color + ";border-color:" + color + ";'></div>" + candidate + "</div></div>");
-};
-Palette.prototype.get = function(candidate, party) {
-  if(typeof this.candidates[candidate] === "undefined") {
-    if(party === "") {
-      this.set(candidate, this.colors[this.nextColor]);
-      this.nextColor++;
-    }
-    else {
-      this.set(candidate, this.partycolors[party]);
-    }
-  }
-  return this.candidates[candidate];
-};
-
-var legend = Handlebars.compile($("#legend-template").html());
-
 var map;
 
 var set_race = function(race, map) {
   map.removePolygons();
   map.removePolylines();
-  colors = new Palette();
+
+  // Persistent race-level key that shows colors per-candidate
+  var key = new Key('#key');
+  var colors = new Palette(key);
+
+  // Per-precinct vote total details
+  var results = new Results('#results');
 
   if(race === 'rail') {
     $.getJSON('race-data/rail.json', function(data) {
@@ -64,21 +32,21 @@ var set_race = function(race, map) {
             fillColor: '#1E44A8',
             fillOpacity: (votes_for / total_votes) * 1.25,
             mouseover: function() {
-              var data = {
+              results.update({
                 precinct: feature.properties.precinct,
                 results: feature.properties.races
-              };
-              $('#key').find('.panel-body').html(legend(data));
-              $('#key').find('#number').text(feature.properties.precinct + ' ');
-              $('#key:hidden').show();
+              });
             },
             mouseout: function() {
-              $('#key').hide();
+              results.showDefault();
             }
           });
         }
       });
-      $('#legend').find('.panel-body').append("<div class='legend-item'><div class='color' style='background-color:#3A56E0;border-color:#3A56E0;'></div>Votes for rail <small>(darker precincts indicate higher support)</small></div></div>");
+      key.add({
+        color: "#3A56E0",
+        label: "Votes for rail <small>(darker precincts indicate higher support)</small>"
+      });
       // Draw the proposed rail line
       $.getJSON('rail-routes/new.json', function(data) {
         var rail_line = data.features[0].geometry.coordinates;
@@ -91,7 +59,10 @@ var set_race = function(race, map) {
           strokeOpacity: 0.75,
           strokeWeight: 5,
         });
-        $('#legend').find('.panel-body').append("<div class='legend-item'><div class='color' style='background-color:#B72B21;border-color:#B7B21;'></div>Proposed rail line</div></div>");
+        key.add({
+          color: "#B72B21",
+          label: "Proposed rail line"
+        });
       });
     });
   }
@@ -112,16 +83,13 @@ var set_race = function(race, map) {
             fillColor: fill.toHexString(),
             fillOpacity: 0.5,
             mouseover: function() {
-              var data = {
+              results.update({
                 precinct: feature.properties.precinct,
                 results: feature.properties.races
-              };
-              $('#key').find('.panel-body').html(legend(data));
-              $('#key').find('#number').text(feature.properties.precinct + ' ');
-              $('#key:hidden').show();
+              });
             },
             mouseout: function() {
-              $('#key').hide();
+              results.showDefault();
             }
           });
         }
@@ -163,7 +131,6 @@ $(function() {
     }
     var zoom = $(this).find(':selected').attr('data-zoom');
     if(typeof zoom !== "undefined") {
-      console.log(parseInt(zoom, 10));
       map.setZoom(zoom_default + parseInt(zoom, 10));
     }
     else {
