@@ -13,8 +13,15 @@ var Results = (function($, Handlebars, _, numeral) {
 
   // Update the key with new data
   Results.prototype.update = function(data) {
+    // Take a pass to determine total votes
+    var total_votes = 0;
     _.each(data.results, function(result) {
-      result.votes = numeral(result.votes).format('0,0');
+      total_votes += result.votes;
+    });
+    // Run through again and add percentages, format votes
+    _.each(data.results, function(result) {
+      result.share = numeral(result.votes / total_votes).format('0 %');
+      result.votes_str = numeral(result.votes).format('0,0');
     });
     this.$el.html(this.template(data));
   };
