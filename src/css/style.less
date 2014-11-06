@@ -22,30 +22,42 @@
 }
 
 /* Legend */
-.key-item .color {
-  border:1px solid;
-  opacity: .4;
-  width: 12px;
-  height: 12px;
-  float: left;
-  margin-right: 5px;
-  border-radius: 50%;
-  margin-top: 4px;
+#key {
+  .key-item.list-group-item {
+    padding: 10px 15px;
+    font-size: 13px;
+    line-height: 13px;
+    .color {
+      opacity: .5;
+      width: 13px;
+      height: 13px;
+      margin-right: 8px;
+      border-radius: 50%;
+    }
+  }
 }
 
 /* Precinct-by-precinct results widget */
 #results {
   .panel-body {
+    padding: 10px 15px 8px 15px;
     p {
-      margin-bottom: 0;
+      margin-bottom: 2px;
     }
     .table {
       margin-bottom: 5px;
+      font-size: .9em;
+      td {
+        padding: 3.5px 5px;
+      }
     }
   }
 }
 
 /* Panels */
+.panel-heading {
+  padding: 8px 15px;
+}
 .panel-title {
   font-weight: bold;
   text-transform: uppercase;

@@ -37,8 +37,7 @@ def build_race_file(target_race, filename):
             sorted_races = sorted(races, key=lambda k: k['votes'], reverse=True)
             precinct_data[current_precinct] = {
               'races': sorted_races,
-              'winner': sorted_races[0],
-              'precinct': current_precinct
+              'winner': sorted_races[0]
             }
 
             # Special handling for ties
@@ -66,10 +65,11 @@ def build_race_file(target_race, filename):
   for key, feature in enumerate(geo['features']):
     precinct = feature['properties']['PCT']
 
+    old_props = feature['properties']
     del feature['properties']
 
     try:
-      feature['properties'] = precinct_data[precinct]
+      feature['properties'] = dict(old_props.items() + precinct_data[precinct].items())
     except KeyError:
       pass
 

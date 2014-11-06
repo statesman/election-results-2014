@@ -32,10 +32,7 @@ var set_race = function(race, map) {
             fillColor: '#1E44A8',
             fillOpacity: (votes_for / total_votes) * 1.25,
             mouseover: function() {
-              results.update({
-                precinct: feature.properties.precinct,
-                results: feature.properties.races
-              });
+              results.update(feature.properties);
             },
             mouseout: function() {
               results.showDefault();
@@ -43,10 +40,12 @@ var set_race = function(race, map) {
           });
         }
       });
+
       key.add({
         color: "#3A56E0",
         label: "Votes for rail <small>(darker precincts indicate higher support)</small>"
       });
+
       // Draw the proposed rail line
       $.getJSON('rail-routes/new.json', function(data) {
         var rail_line = data.features[0].geometry.coordinates;
@@ -64,6 +63,7 @@ var set_race = function(race, map) {
           label: "Proposed rail line"
         });
       });
+
     });
   }
 
@@ -71,7 +71,6 @@ var set_race = function(race, map) {
     $.getJSON('race-data/' + race + '.json', function(data) {
       _.each(data.features, function(feature) {
         if(typeof feature.properties !== "undefined") {
-          var stroke = tinycolor(colors.get(feature.properties.winner.candidate, feature.properties.winner.party));
           var fill = tinycolor(colors.get(feature.properties.winner.candidate, feature.properties.winner.party));
 
           map.drawPolygon({
@@ -83,10 +82,7 @@ var set_race = function(race, map) {
             fillColor: fill.toHexString(),
             fillOpacity: 0.5,
             mouseover: function() {
-              results.update({
-                precinct: feature.properties.precinct,
-                results: feature.properties.races
-              });
+              results.update(feature.properties);
             },
             mouseout: function() {
               results.showDefault();

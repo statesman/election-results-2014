@@ -40,9 +40,10 @@
       <div class="col-xs-12 header">
         <h4>2014 general election</h4>
         <h2 class="page-title">Travis County precinct-by-precinct results</h2>
+        <p><small>Interactive by Andrew Chavez and Christian McDonald, Austin American-Statesman</small></p>
         <p>Use the dropdown to see the highest vote-getter in each Travis County precinct in the Nov. 4 general election. Roll your cursor over each precinct to see votes for all candidates in the selected race. For full results, go to <a href="http://statesman.com/electionresults" target="_blank">statesman.com/electionresults</a></p>
       </div>
-      <div class="col-xs-12 col-sm-4">
+      <div class="col-xs-12">
         <div class="form-group">
           <label for="race" class="control-label">Choose a race:</label>
           <select class="form-control" id="race">
@@ -89,22 +90,17 @@
             </optgroup>
           </select>
         </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Legend</h3>
-          </div>
-          <div id="key" class="panel-body"></div>
-        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <ul id="key" class="list-group"></ul>
         <div id="results"></div>
         <div class="hidden-xs">
-          <p><small>Presentation: Andrew Chavez and Christian McDonald, Austin American-Statesman</small></p>
           <p><small>Data source: Travis County Clerk, Elections Division</small></p>
         </div>
       </div>
       <div class="col-xs-12 col-sm-8">
         <div id="map" style="width:100%;min-height:350px;"></div>
         <div class="hidden-sm hidden-md hidden-lg">
-          <p><small>Presentation: Andrew Chavez and Christian McDonald, Austin American-Statesman</small></p>
           <p><small>Data source: Travis County Clerk, Elections Division</small></p>
         </div>
       </div>
@@ -114,10 +110,10 @@
   <script id="results-template" type="text/x-handlebars-template">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Precinct {{#if precinct}}{{precinct}} {{/if}}results</h3>
+        <h3 class="panel-title">Precinct {{#if PCT}}{{PCT}} {{/if}}results</h3>
       </div>
       <div class="panel-body">
-        {{#if precinct}}
+        {{#if PCT}}
           <table class="table table-striped table-condensed">
             <thead>
               <tr>
@@ -127,7 +123,7 @@
               </tr>
             </thead>
             <tbody>
-              {{#each results}}
+              {{#each races}}
                 <tr>
                   <td>{{candidate}}</td>
                   <td class="text-right">{{votes_str}}</td>
@@ -137,16 +133,53 @@
             </tbody>
           </table>
         {{else}}
-          <p>Hover over a race to see per-precinct vote counts.</p>
+          <p>Tap or hover over a race to see per-precinct vote counts.</p>
         {{/if}}
       </div>
     </div>
+
+    {{#if PCT}}{{#if demos}}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Precinct {{PCT}} demographics</h3>
+        </div>
+        <div class="panel-body">
+          {{#if PCT}}
+            <table class="table table-striped table-condensed">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th class="text-right">Population</th>
+                  <th class="text-right">Voter-age population</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each demos}}
+                  <tr>
+                    <td>{{group}}</td>
+                    <td class="text-right">{{{sum}}}</td>
+                    <td class="text-right">{{{sum_vap}}}</td>
+                  </tr>
+                {{/each}}
+                <tr>
+                  <td><strong>Total</strong></td>
+                  <td class="text-right"><strong>{{demos_sum.sum}}</strong></td>
+                  <td class="text-right"><strong>{{demos_sum.sum_vap}}</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          {{else}}
+            <p>Tap or hover over a race to see per-precinct vote counts.</p>
+          {{/if}}
+        </div>
+      </div>
+    {{/if}}{{/if}}
   </script>
 
   <script id="key-item-template" type="text/x-handlebars-template">
-    <div class="key-item">
-      <div class="color" style="background-color:{{color}};border-color:{{color}};"></div>{{{label}}}
-    </div>
+    <li class="list-group-item key-item">
+      <div class="color pull-left" style="background-color:{{color}};"></div>{{{label}}}
+    </li>
   </script>
 
   <?php include "includes/advertising.php";?>
