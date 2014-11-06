@@ -10,6 +10,7 @@ var Palette = (function($) {
       '#4D1979'
     ];
     this.partycolors = {
+      'TIE': '#000000',
       'REP': '#B72B21',
       'LIB': '#E0C828',
       'DEM': '#1E44A8',
