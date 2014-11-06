@@ -41,7 +41,7 @@
         <h4>2014 general election</h4>
         <h2 class="page-title">Travis County precinct-by-precinct results</h2>
         <p><small>Interactive by Andrew Chavez and Christian McDonald, Austin American-Statesman</small></p>
-        <p>Use the dropdown to see the highest vote-getter in a race for each Travis County precinct in the Nov. 4 general election. Roll your cursor over each precinct to see votes for all candidates in the selected race. For full results, go to <a href="http://statesman.com/electionresults" target="_blank">statesman.com/electionresults</a></p>
+        <p>Use the dropdown to see the highest vote-getter in a race for each Travis County precinct in the Nov. 4 general election. Roll your cursor over each precinct on the map to see votes for all candidates in the selected race. For full results, go to <a href="http://statesman.com/electionresults" target="_blank">statesman.com/electionresults</a></p>
       </div>
       <div class="col-xs-12">
         <div class="form-group">
