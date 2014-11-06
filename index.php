@@ -56,6 +56,20 @@
       font-size: 0.95em;
       color: #777;
     }
+    .header {
+      margin-bottom: 20px;
+    }
+    .header h2.page-title {
+      margin-top: 0;
+      margin-bottom: 5px;
+    }
+    .header h4 {
+      color: #777;
+      text-transform:uppercase;
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: .9em;
+    }
   </style>
 
   <!-- project additions -->
@@ -76,6 +90,11 @@
 
   <div class="container">
     <div class="row">
+      <div class="col-xs-12 header">
+        <h4>2014 general election</h4>
+        <h2 class="page-title">Travis County precinct-by-precinct results</h2>
+        <p>Use the dropdown to see the highest vote-getter in each Travis County precinct in the Nov. 4 general election. Roll your cursor over each precinct to see votes for all candidates in the selected race. For full results, go to <a href="http://statesman.com/electionresults" target="_blank">statesman.com/electionresults</a></p>
+      </div>
       <div class="col-xs-12 col-sm-4">
         <div class="form-group">
           <label for="race" class="control-label">Choose a race:</label>
@@ -130,6 +149,8 @@
           <div id="key" class="panel-body"></div>
         </div>
         <div id="results"></div>
+        <p><small>Presentation: Andrew Chavez and Christian McDonald, Austin American-Statesman</small></p>
+        <p><small>Data source: Travis County Clerk, Elections Division</small></p>
       </div>
       <div class="col-xs-12 col-sm-8">
         <div id="map" style="width:100%;height:700px;"></div>
