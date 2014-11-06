@@ -41,7 +41,7 @@ def build_race_file(target_race, filename):
             }
 
             # Special handling for ties
-            if (sorted_races[0]['votes']) / float(running_vote_total) == .5:
+            if (sorted_races[0]['votes'] == sorted_races[1]['votes']):
               precinct_data[current_precinct]['winner'] = {
                 'candidate': 'Tie',
                 'votes': '-',
