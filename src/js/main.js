@@ -1,8 +1,7 @@
-(function(jQuery, GMaps, _, Key, Palette, Results) {
+(function(jQuery, ElectionMap, _, Key, Palette, Results) {
 
   var set_race = function(race, map) {
-    map.removePolygons();
-    map.removePolylines();
+    map.clear();
 
     // Persistent race-level key that shows colors per-candidate
     var key = new Key('#key');
@@ -23,7 +22,7 @@
               }
               total_votes += opt.votes;
             });
-            map.drawPolygon({
+            map.gmap.drawPolygon({
               paths: feature.geometry.coordinates,
               useGeoJSON: true,
               strokeColor: '#fff',
@@ -52,7 +51,7 @@
           var transposed_coords = _.map(rail_line, function(el) {
             return [el[1], el[0]];
           });
-          map.drawPolyline({
+          map.gmap.drawPolyline({
             path: transposed_coords,
             strokeColor: '#B72B21',
             strokeOpacity: 0.75,
@@ -71,7 +70,7 @@
       $.getJSON('race-data/' + race + '.json', function(data) {
         _.each(data.features, function(feature) {
           if(typeof feature.properties !== "undefined") {
-            map.drawPolygon({
+            map.gmap.drawPolygon({
               paths: feature.geometry.coordinates,
               useGeoJSON: true,
               strokeColor: '#fff',
@@ -94,37 +93,18 @@
 
   $(function() {
 
-    var center_default = [30.280245929155083,-97.73489379882814];
-    var zoom_default = 11;
-
-    var map = new GMaps({
-      div: '#map',
-      lat: center_default[0],
-      lng: center_default[1],
-      zoom: zoom_default
-    });
+    var map = new ElectionMap('#map');
     set_race('rail', map);
 
     $('#race').change(function() {
-      var race = $(this).val();
-      set_race(race, map);
-      var center = $(this).find(':selected').attr('data-center');
-      if(typeof center !== "undefined") {
-        center = center.split(',');
-        map.setCenter(center[0], center[1]);
-      }
-      else {
-        map.setCenter(center_default[0], center_default[1]);
-      }
-      var zoom = $(this).find(':selected').attr('data-zoom');
-      if(typeof zoom !== "undefined") {
-        map.setZoom(zoom_default + parseInt(zoom, 10));
-      }
-      else {
-        map.setZoom(zoom_default);
-      }
+      set_race($(this).val(), map);
+
+      var center = $(this).find(':selected').data('center');
+      var zoom = $(this).find(':selected').data('zoom');
+
+      map.focus(zoom, center);
     });
 
   });
 
-}(jQuery, GMaps, _, Key, Palette, Results));
+}(jQuery, ElectionMap, _, Key, Palette, Results));

@@ -67,6 +67,7 @@ module.exports = function(grunt) {
             'src/js/palette.js',
             'src/js/key.js',
             'src/js/results.js',
+            'src/js/map.js',
             'src/js/main.js'
           ]
         }

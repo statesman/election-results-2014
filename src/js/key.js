@@ -1,4 +1,4 @@
-var Key = (function($, JST) {
+var Key = (function($, JST){
 
   function Key(el) {
     this.$el = $(el);
