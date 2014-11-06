@@ -11,66 +11,13 @@
 
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
-  <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+  <link href="dist/style.css" rel="stylesheet">
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-  <style>
-    body {
-      font-family: 'Open Sans', sans-serif;
-      background: #f9f9f9;
-    }
-    .navbar {
-      background: #395271;
-      border-radius: 0;
-    }
-    .navbar-brand img {
-      height: 26px;
-      width: auto;
-    }
-    .legend-item .color {
-      border:1px solid;
-      opacity: .4;
-      width: 12px;
-      height: 12px;
-      float: left;
-      margin-right: 5px;
-      border-radius: 50%;
-      margin-top: 4px;
-    }
-    .panel {
-      border-radius: 0;
-    }
-    #results .panel-body p {
-      margin-bottom: 0;
-    }
-    #results .panel-body .table {
-      margin-bottom: 5px;
-    }
-    .panel-title {
-      font-weight: bold;
-      text-transform: uppercase;
-      font-size: 0.95em;
-      color: #777;
-    }
-    .header {
-      margin-bottom: 20px;
-    }
-    .header h2.page-title {
-      margin-top: 0;
-      margin-bottom: 5px;
-    }
-    .header h4 {
-      color: #777;
-      text-transform:uppercase;
-      font-weight: bold;
-      margin-bottom: 5px;
-      font-size: .9em;
-    }
-  </style>
 
   <!-- project additions -->
   <?php include "includes/advertising.js";?>
@@ -149,11 +96,17 @@
           <div id="key" class="panel-body"></div>
         </div>
         <div id="results"></div>
-        <p><small>Presentation: Andrew Chavez and Christian McDonald, Austin American-Statesman</small></p>
-        <p><small>Data source: Travis County Clerk, Elections Division</small></p>
+        <div class="hidden-xs">
+          <p><small>Presentation: Andrew Chavez and Christian McDonald, Austin American-Statesman</small></p>
+          <p><small>Data source: Travis County Clerk, Elections Division</small></p>
+        </div>
       </div>
       <div class="col-xs-12 col-sm-8">
         <div id="map" style="width:100%;height:700px;"></div>
+        <div class="hidden-sm hidden-md hidden-lg">
+          <p><small>Presentation: Andrew Chavez and Christian McDonald, Austin American-Statesman</small></p>
+          <p><small>Data source: Travis County Clerk, Elections Division</small></p>
+        </div>
       </div>
     </div>
   </div>
@@ -191,7 +144,7 @@
   </script>
 
   <script id="key-item-template" type="text/x-handlebars-template">
-    <div class="legend-item">
+    <div class="key-item">
       <div class="color" style="background-color:{{color}};border-color:{{color}};"></div>{{{label}}}
     </div>
   </script>

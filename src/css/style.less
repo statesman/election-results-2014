@@ -1,0 +1,58 @@
+// Bring in vanilla Bootstrap ...
+@import 'custom-bootstrap/bootstrap.less';
+// ... and then decorate it with TCU 360 styles
+@import 'custom-bootstrap/variables.less';
+
+/* Navbar */
+.navbar-brand img {
+  height: 26px;
+  width: auto;
+}
+
+/* Legend */
+.key-item .color {
+  border:1px solid;
+  opacity: .4;
+  width: 12px;
+  height: 12px;
+  float: left;
+  margin-right: 5px;
+  border-radius: 50%;
+  margin-top: 4px;
+}
+
+/* Precinct-by-precinct results widget */
+#results {
+  .panel-body {
+    p {
+      margin-bottom: 0;
+    }
+    .table {
+      margin-bottom: 5px;
+    }
+  }
+}
+
+/* Panels */
+.panel-title {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.95em;
+  color: #777;
+}
+
+/* Header */
+.header {
+  margin-bottom: 20px;
+  h2.page-title {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+  h4 {
+    color: #777;
+    text-transform:uppercase;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: .9em;
+  }
+}

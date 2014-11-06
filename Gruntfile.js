@@ -4,6 +4,22 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
 
+    // Transpile LESS
+    less: {
+      options: {
+        paths: ['bower_components/bootstrap/less']
+      },
+      prod: {
+        options: {
+          compress: true,
+          cleancss: true
+        },
+        files: {
+          "dist/style.css": "src/css/style.less"
+        }
+      }
+    },
+
     // Run our JavaScript through JSHint
     jshint: {
       js: {
@@ -37,6 +53,7 @@ module.exports = function(grunt) {
   });
 
   // Load the task plugins
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
