@@ -1,5 +1,5 @@
 <div class="clearfix" style="margin-top:25px; margin-bottom:15px;" id="ads">
-	<div class="visible-xs hidden-sm hidden-md hidden-lg col-xs-12">
+	<div class="visible-xs hidden-sm hidden-md hidden-lg col-xs-12" style="padding-left:0;padding-right:0;">
 		<!-- www.statesman.com-wired/news/state_regional -->
 		<div id='div-gpt-ad-1403295829614-3' class="center-block" style='width:320px; height:50px;'>
 		<script type='text/javascript'>
@@ -7,7 +7,7 @@
 		</script>
 		</div>
 	</div>
-	<div class="hidden-xs visible-sm visible-md visible-lg col-xs-12">
+	<div class="hidden-xs visible-sm visible-md visible-lg col-xs-12" style="padding-left:0;padding-right:0;">
 		<!-- www.statesman.com-wired/news/state_regional -->
 		<div id='div-gpt-ad-1403295829614-1' class="center-block" style='width:728px; height:90px;'>
 		<script type='text/javascript'>

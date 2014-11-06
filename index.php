@@ -59,7 +59,7 @@
   </style>
 
   <!-- project additions -->
-  <?php include "advertising.js";?>
+  <?php include "includes/advertising.js";?>
   <?php include "includes/metrics-head.js";?>
 </head>
 
@@ -175,10 +175,11 @@
     </div>
   </script>
 
+  <?php include "includes/advertising.php";?>
+
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCy25plOzFlJryxCSF7CkOWL86C8tZWsLI"></script>
   <script type="text/javascript" src="dist/scripts.js"></script>
 
-  <?php include "includes/advertising.php";?>
   <!-- metrics code -->
   <?php include "includes/project-metrics.js"; ?>
   <?php include "includes//metrics.js"; ?>
