@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,10 +45,10 @@
       border-radius: 0;
     }
     #results .panel-body p {
-      margin-bottom: 10px;
+      margin-bottom: 0;
     }
     #results .panel-body .table {
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
     .panel-title {
       font-weight: bold;
@@ -56,7 +57,12 @@
       color: #777;
     }
   </style>
+
+  <!-- project additions -->
+  <?php include "advertising.js";?>
+  <?php include "includes/metrics-head.js";?>
 </head>
+
 <body>
   <nav class="navbar navbar-default" role="navigation">
     <div class="container">
@@ -159,7 +165,6 @@
         {{else}}
           <p>Hover over a race to see per-precinct vote counts.</p>
         {{/if}}
-        <small class="text-right">Source: Travis County Clerk</small>
       </div>
     </div>
   </script>
@@ -172,6 +177,11 @@
 
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCy25plOzFlJryxCSF7CkOWL86C8tZWsLI"></script>
   <script type="text/javascript" src="dist/scripts.js"></script>
+
+  <?php include "includes/advertising.php";?>
+  <!-- metrics code -->
+  <?php include "includes/project-metrics.js"; ?>
+  <?php include "includes//metrics.js"; ?>
 
 </body>
 </html>
