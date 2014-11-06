@@ -225,7 +225,9 @@
             map.drawPolygon({
               paths: feature.geometry.coordinates,
               useGeoJSON: true,
-              strokeWeight: 0,
+              strokeColor: '#fff',
+              strokeOpacity: 0.5,
+              strokeWeight: 1,
               fillColor: '#3A56E0',
               fillOpacity: (votes_for / total_votes) * 1.25,
               mouseover: function() {
@@ -271,11 +273,11 @@
             map.drawPolygon({
               paths: feature.geometry.coordinates,
               useGeoJSON: true,
-              strokeColor: stroke.darken(15).toHexString(),
-              strokeOpacity: 0.75,
+              strokeColor: '#fff',
+              strokeOpacity: 0.5,
               strokeWeight: 1,
               fillColor: fill.toHexString(),
-              fillOpacity: 0.4,
+              fillOpacity: 0.5,
               mouseover: function() {
                 var data = {
                   precinct: feature.properties.precinct,
