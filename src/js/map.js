@@ -2,7 +2,7 @@ var ElectionMap = (function(GMaps){
 
   function ElectionMap(el, keyEl) {
     this.defaults = {
-      center: [30.280245929155083,-97.73489379882814],
+      center: [30.2968475746788, -97.72768402099611],
       zoom: 11
     };
 
@@ -35,7 +35,7 @@ var ElectionMap = (function(GMaps){
     this.gmap.removePolygons();
     this.gmap.removePolylines();
   };
-  
+
   return ElectionMap;
 
 }(GMaps));

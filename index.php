@@ -73,6 +73,8 @@
               <option value="state-house-49" data-zoom="1">District 49</option>
               <option value="state-house-50" data-center="30.353746162505935,-97.58005523681642">District 50</option>
               <option value="state-house-51" data-center="30.16039373431057,-97.67412567138673">District 51</option>
+              <option value="state-house-52" data-zoom="1">District 52</option>
+              <option value="state-house-136" data-zoom="1">District 136</option>
             </optgroup>
             <optgroup label="City of Austin races">
               <option value="mayor">Austin Mayor</option>

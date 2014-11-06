@@ -3,11 +3,30 @@ import csv, sys, simplejson
 # And walk the CSV
 def build_race_file(target_race, filename):
 
-  # Get the JSON fil
-  fd = open('turnout.geojson', 'r')
-  text = fd.read()
-  fd.close()
-  geo = simplejson.loads(text)
+  # Get the JSON files for Travis and Williamson and combine them
+  travis_file = open('precincts/travis.geojson', 'r')
+  text = travis_file.read()
+  travis_file.close()
+  travis_geo = simplejson.loads(text)
+
+  williamson_file = open('precincts/williamson.geojson', 'r')
+  text = williamson_file.read()
+  williamson_file.close()
+  williamson_geo = simplejson.loads(text)
+
+  # Loop through Williamson, and align the precinct name with Travis's and clean
+  # out the rest of the junk props
+  for precinct in williamson_geo['features']:
+    old_precinct = precinct['properties']['Label']
+    del precinct['properties']
+    precinct['properties'] = {
+      'PCT': 'W' + str(old_precinct)
+    }
+
+  geo = {
+    "type": "FeatureCollection",
+    "features": travis_geo['features'] + williamson_geo['features']
+  }
 
   races = []
   current_precinct = None
@@ -41,12 +60,15 @@ def build_race_file(target_race, filename):
             }
 
             # Special handling for ties
-            if (sorted_races[0]['votes'] == sorted_races[1]['votes']):
-              precinct_data[current_precinct]['winner'] = {
-                'candidate': 'Tie',
-                'votes': '-',
-                'party': 'TIE'
-              }
+            try:
+              if (sorted_races[0]['votes'] == sorted_races[1]['votes']):
+                precinct_data[current_precinct]['winner'] = {
+                  'candidate': 'Tie',
+                  'votes': '-',
+                  'party': 'TIE'
+                }
+            except IndexError:
+              pass
 
           races = []
           running_vote_total = 0
@@ -62,7 +84,7 @@ def build_race_file(target_race, filename):
         # Keep a running vote total to calculate the percentage down the road
         running_vote_total = running_vote_total + total_votes
 
-  for key, feature in enumerate(geo['features']):
+  for feature in geo['features']:
     precinct = feature['properties']['PCT']
 
     old_props = feature['properties']
@@ -98,6 +120,7 @@ build_race_file("DISTRICT 10, UNITED STATES REPRESENTATIVE", 'us-rep-10')
 build_race_file("DISTRICT 17, UNITED STATES REPRESENTATIVE", 'us-rep-17')
 build_race_file("DISTRICT 21, UNITED STATES REPRESENTATIVE", 'us-rep-21')
 build_race_file("DISTRICT 25, UNITED STATES REPRESENTATIVE", 'us-rep-25')
+build_race_file("DISTRICT 31, UNITED STATES REPRESENTATIVE", 'us-rep-31')
 build_race_file("DISTRICT 35, UNITED STATES REPRESENTATIVE", 'us-rep-35')
 
 build_race_file("DISTRICT 46, STATE REPRESENTATIVE", "state-house-46")
@@ -107,6 +130,11 @@ build_race_file("DISTRICT 49, STATE REPRESENTATIVE", "state-house-49")
 build_race_file("DISTRICT 50, STATE REPRESENTATIVE", "state-house-50")
 build_race_file("DISTRICT 51, STATE REPRESENTATIVE", "state-house-51")
 
+build_race_file("DISTRICT 20, STATE REPRESENTATIVE", "state-house-20")
+build_race_file("DISTRICT 52, STATE REPRESENTATIVE", "state-house-52")
+build_race_file("DISTRICT 136, STATE REPRESENTATIVE", "state-house-136")
+
+build_race_file("DISTRICT 5, STATE SENATOR", "state-senate-5")
 build_race_file("DISTRICT 14, STATE SENATOR", "state-senate-14")
 build_race_file("DISTRICT 25, STATE SENATOR", "state-senate-25")
 
