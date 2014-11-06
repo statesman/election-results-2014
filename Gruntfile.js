@@ -38,7 +38,6 @@ module.exports = function(grunt) {
             'bower_components/jquery/dist/jquery.js',
             'bower_components/gmaps/gmaps.js',
             'bower_components/underscore/underscore.js',
-            'bower_components/tinycolor/tinycolor.js',
             'bower_components/handlebars/handlebars.js',
             'bower_components/numeral/numeral.js',
             'src/js/palette.js',

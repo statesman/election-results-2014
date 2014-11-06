@@ -1,4 +1,4 @@
-var Palette = (function($) {
+var Palette = (function() {
 
   function Palette(key) {
     this.key = key;
@@ -44,4 +44,4 @@ var Palette = (function($) {
 
   return Palette;
 
-}(jQuery));
+}());

@@ -1,4 +1,4 @@
-var Key = (function() {
+var Key = (function($, Handlebars) {
 
   function Key(el) {
     this.$el = $(el);
@@ -15,4 +15,4 @@ var Key = (function() {
 
   return Key;
 
-}());
+}(jQuery, Handlebars));
