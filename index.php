@@ -21,7 +21,7 @@
 
   <!-- project additions -->
   <?php include "includes/advertising.js";?>
-  <?php include "includes/metrics-head.js";?>
+  <?php include "../../common/metrics-head.js";?>
 </head>
 
 <body>
@@ -156,7 +156,7 @@
 
   <!-- metrics code -->
   <?php include "includes/project-metrics.js"; ?>
-  <?php include "includes//metrics.js"; ?>
+  <?php include "../../common/metrics.js"; ?>
 
 </body>
 </html>
