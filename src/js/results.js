@@ -32,7 +32,7 @@ var Results = (function($, JST, _, numeral) {
       race.votes_str = numeral(race.votes).format('0,0');
     });
     // Format demographic data
-    if(data.SUM_TOTAL !== 0) {
+    if(typeof data.SUM_TOTAL !== "undefined" && data.SUM_TOTAL !== 0) {
       data.demos = [
         {
           "group": "Anglo",

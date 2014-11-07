@@ -1,3 +1,5 @@
+var gmap;
+
 (function(jQuery, ElectionMap, _, Key, Palette, Results) {
 
   var set_race = function(race, map) {
@@ -94,6 +96,7 @@
   $(function() {
 
     var map = new ElectionMap('#map');
+    gmap = map.gmap;
     set_race('rail', map);
 
     $('#race').change(function() {

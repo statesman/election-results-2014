@@ -39,27 +39,28 @@
     <div class="row">
       <div class="col-xs-12 header">
         <h4>2014 general election</h4>
-        <h2 class="page-title">Travis County precinct-by-precinct results</h2>
+        <h2 class="page-title">Travis and Williamson county precinct-by-precinct results</h2>
         <p><small>Interactive by Andrew Chavez and Christian McDonald, Austin American-Statesman</small></p>
-        <p>Use the dropdown to see the highest vote-getter in a race for each Travis County precinct in the Nov. 4 general election. Roll your cursor over each precinct on the map to see votes for all candidates in the selected race. For full results, go to <a href="http://statesman.com/electionresults" target="_blank">statesman.com/electionresults</a></p>
+        <p>Use the dropdown to see the highest vote-getter in a race for each Travis and Williamson county precinct in the Nov. 4 general election. Roll your cursor over each precinct on the map to see votes for all candidates in the selected race. For full results, go to <a href="http://statesman.com/electionresults" target="_blank">statesman.com/electionresults</a></p>
       </div>
       <div class="col-xs-12">
         <div class="form-group">
           <label for="race" class="control-label">Choose a race:</label>
           <select class="form-control" id="race">
             <optgroup label="State offices">
-              <option data-zoom="-1" value="governor">Governor</option>
-              <option data-zoom="-1" value="lt-governor">Lt. Governor</option>
-              <option data-zoom="-1" value="attorney-general">Attorney General</option>
+              <option data-zoom="-1" data-center="30.470995016166533,-97.67961883544923" value="governor">Governor</option>
+              <option data-zoom="-1" data-center="30.470995016166533,-97.67961883544923" value="lt-governor">Lt. Governor</option>
+              <option data-zoom="-1" data-center="30.470995016166533,-97.67961883544923" value="attorney-general">Attorney General</option>
             </optgroup>
             <optgroup label="U.S. Senator">
-              <option data-zoom="-1" value="senate">U.S. Senator</option>
+              <option data-zoom="-1" data-center="30.470995016166533,-97.67961883544923" value="senate">U.S. Senator</option>
             </optgroup>
             <optgroup label="U.S. Representative">
               <option value="us-rep-10" data-center="30.341302420968095,-97.64940643310548">District 10</option>
               <option value="us-rep-17" data-center="30.428375366501577,-97.56906890869142">District 17</option>
               <option value="us-rep-21" data-zoom="1" data-center="30.20550377358846,-97.82930755615236">District 21</option>
               <option value="us-rep-25" data-zoom="-1" data-center="30.38514475827691,-97.94586563110353">District 25</option>
+              <option value="us-rep-31" data-zoom="-1" data-center="30.630061684293455,-97.61078262329103">District 31</option>
               <option value="us-rep-35" data-center="30.19660211266278,-97.66846084594728">District 35</option>
             </optgroup>
             <optgroup label="State Senate">
@@ -67,14 +68,15 @@
               <option value="state-senate-25" data-zoom="1" data-center="30.1589095005721,-97.85969161987306">District 25</option>
             </optgroup>
             <optgroup label="State Representative">
+              <option value="state-house-20" data-zoom="-1" data-center="30.664324403102558,-97.6226272583008">District 20</option>
               <option value="state-house-46" data-zoom="1" data-center="30.35907871018818,-97.61301422119142">District 46</option>
               <option value="state-house-47" data-zoom="-1" data-center="30.336561531832643,-97.95496368408205">District 47</option>
               <option value="state-house-48" data-center="30.282617764815303,-97.81042480468751">District 48</option>
-              <option value="state-house-49" data-zoom="1">District 49</option>
+              <option value="state-house-49" data-zoom="1" data-center="30.309296964723977,-97.72905731201173">District 49</option>
               <option value="state-house-50" data-center="30.353746162505935,-97.58005523681642">District 50</option>
               <option value="state-house-51" data-center="30.16039373431057,-97.67412567138673">District 51</option>
-              <option value="state-house-52" data-zoom="1">District 52</option>
-              <option value="state-house-136" data-zoom="1">District 136</option>
+              <option value="state-house-52" data-center="30.540803561891984,-97.58623504638673">District 52</option>
+              <option value="state-house-136" data-zoom="1" data-center="30.522468882456955,-97.80046844482423">District 136</option>
             </optgroup>
             <optgroup label="City of Austin races">
               <option value="mayor">Austin Mayor</option>
@@ -97,13 +99,13 @@
         <ul id="key" class="list-group"></ul>
         <div id="results"></div>
         <div class="hidden-xs">
-          <p><small>Data source: Travis County Clerk, Elections Division</small></p>
+          <p><small>Data source: Travis County Clerk, Elections Division; Williamson County Clerk, Elections Department</small></p>
         </div>
       </div>
       <div class="col-xs-12 col-sm-8">
         <div id="map" style="width:100%;min-height:350px;"></div>
         <div class="hidden-sm hidden-md hidden-lg">
-          <p><small>Data source: Travis County Clerk, Elections Division</small></p>
+          <p><small>Data source: Travis County Clerk, Elections Division; Williamson County Clerk, Elections Department</small></p>
         </div>
       </div>
     </div>
