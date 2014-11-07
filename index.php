@@ -5,8 +5,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 
-  <title>Precinct-by-precinct vote totals</title>
+  <title>Travis and Williamson county precinct-by-precinct 2014 election results | Statesman.com</title>
   <link rel="icon" type="image/png" href="//projects.statesman.com/common/favicon.ico">
+
+  <meta name="description" content="Precinct-by-precinct Travis and Williamson county election results for the 2014 general election.">
+
+  <meta property="og:title" content="Travis and Williamson county election results map"/>
+  <meta property="og:description" content="Precinct-by-precinct Travis and Williamson county election results for the 2014 general election."/>
+  <meta property="og:image" content="assets/social-share.jpg"/>
+  <meta property="og:url" content="http://projects.statesman.com/databases/election-maps/"/>
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@statesman" />
+  <meta name="twitter:title" content="Travis and Williamson county election results map" />
+  <meta name="twitter:description" content="Precinct-by-precinct Travis and Williamson county election results for the 2014 general election." />
+  <meta name="twitter:image" content="assets/social-share.jpg" />
+  <meta name="twitter:url" content="http://projects.statesman.com/databases/election-maps/" />
 
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
