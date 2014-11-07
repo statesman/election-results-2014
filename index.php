@@ -12,14 +12,14 @@
 
   <meta property="og:title" content="Travis and Williamson county election results map"/>
   <meta property="og:description" content="Precinct-by-precinct Travis and Williamson county election results for the 2014 general election."/>
-  <meta property="og:image" content="assets/social-share.jpg"/>
+  <meta property="og:image" content="http://projects.statesman.com/databases/election-maps/assets/social-share.jpg"/>
   <meta property="og:url" content="http://projects.statesman.com/databases/election-maps/"/>
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@statesman" />
   <meta name="twitter:title" content="Travis and Williamson county election results map" />
   <meta name="twitter:description" content="Precinct-by-precinct Travis and Williamson county election results for the 2014 general election." />
-  <meta name="twitter:image" content="assets/social-share.jpg" />
+  <meta name="twitter:image" content="http://projects.statesman.com/databases/election-maps/assets/social-share.jpg" />
   <meta name="twitter:url" content="http://projects.statesman.com/databases/election-maps/" />
 
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
