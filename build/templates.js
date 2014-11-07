@@ -1,12 +1,12 @@
 this["JST"] = this["JST"] || {};
 
 this["JST"]["key_item"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<li class=\"list-group-item key-item\">\r\n  <div class=\"color pull-left\" style=\"background-color:"
+  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<a class=\"list-group-item key-item\">\r\n  <div class=\"color pull-left\" style=\"background-color:"
     + escapeExpression(((helper = (helper = helpers.color || (depth0 != null ? depth0.color : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"color","hash":{},"data":data}) : helper)))
     + ";\"></div>";
   stack1 = ((helper = (helper = helpers.label || (depth0 != null ? depth0.label : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"label","hash":{},"data":data}) : helper));
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "\r\n</li>\r\n";
+  return buffer + "\r\n</a>\r\n";
 },"useData":true});
 
 

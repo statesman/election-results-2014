@@ -18,15 +18,22 @@ var Palette = (function() {
     };
     this.nextColor = 0;
     this.candidates = {};
-    this.key.reset();
+    this.key.destroy();
   }
 
   Palette.prototype.set = function(candidate, color, label) {
     this.candidates[candidate] = color;
+    var filter;
+    if(candidate !== "For" && candidate !== "Tie" && typeof label == "undefined") {
+      filter = candidate;
+    }
+    else {
+      filter = null;
+    }
     this.key.add({
       color: color,
       label: label || candidate
-    });
+    }, filter);
   };
 
   Palette.prototype.get = function(candidate, party, label) {

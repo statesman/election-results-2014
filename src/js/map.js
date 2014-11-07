@@ -10,7 +10,8 @@ var ElectionMap = (function($, GMaps, google){
       div: el,
       lat: this.defaults.center[0],
       lng: this.defaults.center[1],
-      zoom: this.defaults.zoom
+      zoom: this.defaults.zoom,
+      maxZoom: 14
     });
   }
 
@@ -80,34 +81,68 @@ var ElectionMap = (function($, GMaps, google){
     });
   };
 
-  ElectionMap.prototype.preDraw = function() {
+  ElectionMap.prototype.drawPrecinctsByWinner = function(precincts) {
+    var self = this;
+    _.each(precincts, function(precinct) {
+      if(typeof precinct.properties !== "undefined") {
+        this.drawPrecinct({
+          paths: precinct.geometry.coordinates,
+          fill: this.colors.get(precinct.properties.winner.candidate, precinct.properties.winner.party),
+          resultsData: precinct.properties
+        });
+      }
+    }, self);
+  };
+
+  ElectionMap.prototype.drawPrecinctsBySupport = function(precincts, opt, label) {
+    var color = this.colors.get(opt, "", label),
+        self = this;
+
+    _.each(precincts, function(precinct) {
+      if(typeof precinct.properties !== "undefined") {
+        var votes_for = 0,
+            total_votes = 0;
+        _.each(precinct.properties.races, function(option) {
+          if(option.candidate === opt) {
+            votes_for += option.votes;
+          }
+          total_votes += option.votes;
+        });
+        this.drawPrecinct({
+          paths: precinct.geometry.coordinates,
+          fill: color,
+          opacity: (votes_for / total_votes) * 1.25,
+          resultsData: precinct.properties
+        });
+      }
+    }, self);
+  };
+
+  ElectionMap.prototype.preDraw = function(race) {
     this.clear();
 
-    this.key = new Key('#key');
+    if(typeof this.key !== "undefined") {
+      this.key.destroy();
+    }
+
+    this.key = new Key('#key', this);
     this.colors = new Palette(this.key);
     this.results = new Results('#results');
+    this.race = race;
   };
 
   ElectionMap.prototype.drawWinners = function(race) {
-    this.preDraw();
-    var self = this;
+    this.preDraw(race);
 
+    var self = this;
     $.getJSON('race-data/' + race + '.json', function(data) {
-      _.each(data.features, function(feature) {
-        if(typeof feature.properties !== "undefined") {
-          this.drawPrecinct({
-            paths: feature.geometry.coordinates,
-            fill: this.colors.get(feature.properties.winner.candidate, feature.properties.winner.party),
-            resultsData: feature.properties
-          });
-        }
-      }, self);
+      self.raceData = data;
+      self.drawPrecinctsByWinner(data.features);
     });
   };
 
   ElectionMap.prototype.drawSupport = function(race, opt) {
-    this.preDraw();
-    var self = this;
+    this.preDraw(race);
 
     var label = "";
     if (opt === "For") {
@@ -117,28 +152,24 @@ var ElectionMap = (function($, GMaps, google){
       label = "Votes for " + opt;
     }
     label = label + " <small>(darker precincts indicate higher support)</small>";
-    var color = this.colors.get(opt, "", label);
 
+    var self = this;
     $.getJSON('race-data/' + race + '.json', function(data) {
-      _.each(data.features, function(feature) {
-        if(typeof feature.properties !== "undefined") {
-          var votes_for = 0,
-              total_votes = 0;
-          _.each(feature.properties.races, function(option) {
-            if(option.candidate === opt) {
-              votes_for += option.votes;
-            }
-            total_votes += option.votes;
-          });
-          this.drawPrecinct({
-            paths: feature.geometry.coordinates,
-            fill: color,
-            opacity: (votes_for / total_votes) * 1.25,
-            resultsData: feature.properties
-          });
-        }
-      }, self);
+      self.raceData = data;
+      self.drawPrecinctsBySupport(data.features, opt, label);
     });
+  };
+
+  ElectionMap.prototype.showSupport = function(opt) {
+    this.gmap.removePolygons();
+
+    this.drawPrecinctsBySupport(this.raceData.features, opt);
+  };
+
+  ElectionMap.prototype.hideSupport = function() {
+    this.gmap.removePolygons();
+
+    this.drawPrecinctsByWinner(this.raceData.features);
   };
 
   return ElectionMap;

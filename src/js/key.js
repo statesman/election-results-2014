@@ -1,17 +1,31 @@
-var Key = (function($, JST){
+var Key = (function($, JST, _){
 
-  function Key(el) {
+  function Key(el, map) {
     this.$el = $(el);
+    this.map = map;
   }
 
-  Key.prototype.add = function(data) {
-    this.$el.append(JST.key_item(data));
+  Key.prototype.add = function(data, filter) {
+    var self = this;
+    var optEl = $(JST.key_item(data));
+    optEl.appendTo(this.$el);
+    if(filter) {
+      optEl.on('mouseenter', function() {
+        self.map.showSupport(filter);
+      })
+      .on('mouseleave', function() {
+        self.map.hideSupport();
+      });
+    }
+    else {
+      optEl.addClass('disabled');
+    }
   };
 
-  Key.prototype.reset = function() {
-    this.$el.empty();
+  Key.prototype.destroy = function() {
+    this.$el.children('a').remove();
   };
 
   return Key;
 
-}(jQuery, JST));
+}(jQuery, JST, _));
