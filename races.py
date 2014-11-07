@@ -1,5 +1,27 @@
 import csv, sys, simplejson
 
+def write_precinct_data(races, precinct, data):
+  """
+  Write the race data to the passed precinct data dict
+  """
+  try:
+    sorted_races = sorted(races, key=lambda k: k['votes'], reverse=True)
+    data[precinct] = {
+      'races': sorted_races,
+      'winner': sorted_races[0]
+    }
+
+    # Special handling for ties
+    if (sorted_races[0]['votes'] == sorted_races[1]['votes']):
+      data[precinct]['winner'] = {
+        'candidate': 'Tie',
+        'votes': '-',
+        'party': 'TIE'
+      }
+  except IndexError:
+    pass
+
+
 # And walk the CSV
 def build_race_file(target_races, filename):
 
@@ -35,22 +57,7 @@ def build_race_file(target_races, filename):
 
         if current_precinct != precinct and current_precinct != None:
           if running_vote_total > 0:
-            sorted_races = sorted(races, key=lambda k: k['votes'], reverse=True)
-            precinct_data[current_precinct] = {
-              'races': sorted_races,
-              'winner': sorted_races[0]
-            }
-
-            # Special handling for ties
-            try:
-              if (sorted_races[0]['votes'] == sorted_races[1]['votes']):
-                precinct_data[current_precinct]['winner'] = {
-                  'candidate': 'Tie',
-                  'votes': '-',
-                  'party': 'TIE'
-                }
-            except IndexError:
-              pass
+            write_precinct_data(races, current_precinct, precinct_data)
 
           races = []
           running_vote_total = 0
@@ -65,6 +72,9 @@ def build_race_file(target_races, filename):
 
         # Keep a running vote total to calculate the percentage down the road
         running_vote_total = running_vote_total + total_votes
+
+    # Write the last row
+    write_precinct_data(races, current_precinct, precinct_data)
 
   # Loop through Williamson results and add them to precinct data
   with open('results/williamson.csv', 'rb') as input_file:
@@ -89,22 +99,7 @@ def build_race_file(target_races, filename):
 
         if current_precinct != precinct and current_precinct != None:
           if running_vote_total > 0:
-            sorted_races = sorted(races, key=lambda k: k['votes'], reverse=True)
-            precinct_data[current_precinct] = {
-              'races': sorted_races,
-              'winner': sorted_races[0]
-            }
-
-            # Special handling for ties
-            try:
-              if (sorted_races[0]['votes'] == sorted_races[1]['votes']):
-                precinct_data[current_precinct]['winner'] = {
-                  'candidate': 'Tie',
-                  'votes': '-',
-                  'party': 'TIE'
-                }
-            except IndexError:
-              pass
+            write_precinct_data(races, current_precinct, precinct_data)
 
           races = []
           running_vote_total = 0
@@ -119,6 +114,9 @@ def build_race_file(target_races, filename):
 
         # Keep a running vote total to calculate the percentage down the road
         running_vote_total = running_vote_total + total_votes
+
+    # Write the last row
+    write_precinct_data(races, current_precinct, precinct_data)
 
   to_thin = []
   for i, feature in enumerate(geo['features']):
