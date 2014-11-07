@@ -11,6 +11,7 @@ var ElectionMap = (function($, GMaps, google){
       lat: this.defaults.center[0],
       lng: this.defaults.center[1],
       zoom: this.defaults.zoom,
+      minZoom: 10,
       maxZoom: 14
     });
   }
