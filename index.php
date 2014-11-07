@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 
   <title>Precinct-by-precinct vote totals</title>
   <link rel="icon" type="image/png" href="//projects.statesman.com/common/favicon.ico">
@@ -119,6 +119,9 @@
   <!-- metrics code -->
   <?php include "includes/project-metrics.js"; ?>
   <?php include "../../common/metrics.js"; ?>
+
+  <p class="center-block text-center legal" style="max-width: 500px;margin-bottom:10px;line-height:15px;"><small>© 2014 <a href="http://www.coxmediagroup.com" target="_blank">Cox Media Group</a>. By using this website,
+    you accept the terms of our <a href="http://www.mystatesman.com/visitor_agreement/" target="_blank">Visitor Agreement</a> and <a target="_blank" href="http://www.mystatesman.com/privacy_policy/">Privacy Policy</a>, and understand your options regarding <a target="_blank" href="http://www.mystatesman.com/privacy_policy/#ad-choices">Ad Choices</a><img border="0" src="http://media.cmgdigital.com/shared/img/photos/2012/02/29/d3/da/ad_choices_logo.png" alt="AdChoices" style="margin: 0 0 0 4px;">.</small></p>
 
 </body>
 </html>
