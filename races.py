@@ -4,29 +4,10 @@ import csv, sys, simplejson
 def build_race_file(target_races, filename):
 
   # Get the JSON files for Travis and Williamson and combine them
-  travis_file = open('precincts/travis.geojson', 'r')
-  text = travis_file.read()
-  travis_file.close()
-  travis_geo = simplejson.loads(text)
-
-  williamson_file = open('precincts/williamson.geojson', 'r')
-  text = williamson_file.read()
-  williamson_file.close()
-  williamson_geo = simplejson.loads(text)
-
-  # Loop through Williamson, and align the precinct name with Travis's and clean
-  # out the rest of the junk props
-  for precinct in williamson_geo['features']:
-    old_precinct = precinct['properties']['Label']
-    del precinct['properties']
-    precinct['properties'] = {
-      'PCT': 'W' + str(old_precinct)
-    }
-
-  geo = {
-    "type": "FeatureCollection",
-    "features": travis_geo['features'] + williamson_geo['features']
-  }
+  combined = open('precincts/combined-simplified.geojson', 'r')
+  text = combined.read()
+  combined.close()
+  geo = simplejson.loads(text)
 
   races = []
   current_precinct = None
@@ -139,8 +120,8 @@ def build_race_file(target_races, filename):
         # Keep a running vote total to calculate the percentage down the road
         running_vote_total = running_vote_total + total_votes
 
-
-  for feature in geo['features']:
+  to_thin = []
+  for i, feature in enumerate(geo['features']):
     precinct = feature['properties']['PCT']
 
     old_props = feature['properties']
@@ -149,7 +130,11 @@ def build_race_file(target_races, filename):
     try:
       feature['properties'] = dict(old_props.items() + precinct_data[precinct].items())
     except KeyError:
+      to_thin.append(i)
       pass
+
+  for feature in to_thin[::-1]:
+    geo['features'].pop(feature)
 
   json_out = open('race-data/' + filename + '.json', 'w')
   json_out.write(simplejson.dumps(geo))
