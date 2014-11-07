@@ -17,6 +17,7 @@
     "gmaps": "~0.4.15",
     "underscore": "~1.7.0",
     "handlebars": "~2.0.0",
-    "numeral": "~1.5.3"
+    "numeral": "~1.5.3",
+    "geocomplete": "~1.6.4"
   }
 }

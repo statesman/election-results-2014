@@ -1,4 +1,4 @@
-var ElectionMap = (function(GMaps){
+var ElectionMap = (function(GMaps, google){
 
   function ElectionMap(el, keyEl) {
     this.defaults = {
@@ -16,7 +16,6 @@ var ElectionMap = (function(GMaps){
 
   ElectionMap.prototype.focus = function(zoom, center) {
     if(typeof center !== "undefined") {
-      center = center.split(',');
       this.gmap.setCenter(center[0], center[1]);
     }
     else {
@@ -36,6 +35,19 @@ var ElectionMap = (function(GMaps){
     this.gmap.removePolylines();
   };
 
+  ElectionMap.prototype.mark = function(lat, lng) {
+    this.unMark();
+    this.gmap.addMarker({
+      lat: lat,
+      lng: lng
+    });
+    this.focus(2, [lat, lng]);
+  };
+
+  ElectionMap.prototype.unMark = function() {
+    this.gmap.removeMarkers();
+  };
+
   return ElectionMap;
 
-}(GMaps));
+}(GMaps, google));

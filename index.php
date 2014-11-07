@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" >
-
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,10 +42,11 @@
         <p><small>Interactive by Andrew Chavez and Christian McDonald, Austin American-Statesman</small></p>
         <p>Use the dropdown to see the highest vote-getter in a race for each Travis and Williamson county precinct in the Nov. 4 general election. Roll your cursor over each precinct on the map to see votes for all candidates in the selected race. For full results, go to <a href="http://statesman.com/electionresults" target="_blank">statesman.com/electionresults</a></p>
       </div>
-      <div class="col-xs-12">
-        <div class="form-group">
+
+      <div class="form-group clearfix">
+        <div class="col-lg-6">
           <label for="race" class="control-label">Choose a race:</label>
-          <select class="form-control" id="race">
+            <select class="form-control" id="race" name="race">
             <optgroup label="State offices">
               <option data-zoom="-1" data-center="30.470995016166533,-97.67961883544923" value="governor">Governor</option>
               <option data-zoom="-1" data-center="30.470995016166533,-97.67961883544923" value="lt-governor">Lt. Governor</option>
@@ -94,7 +94,14 @@
             </optgroup>
           </select>
         </div>
+        <div class="col-lg-6">
+          <label for="address" class="control-label">Find an address:</label>
+          <input name="address" id="address" type="text" class="form-control">
+        </div>
       </div>
+    </div>
+
+    <div class="row">
       <div class="col-xs-12 col-sm-4">
         <ul id="key" class="list-group"></ul>
         <div id="results"></div>
@@ -113,7 +120,7 @@
 
   <?php include "includes/advertising.php";?>
 
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCy25plOzFlJryxCSF7CkOWL86C8tZWsLI"></script>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCy25plOzFlJryxCSF7CkOWL86C8tZWsLI&libraries=places"></script>
   <script type="text/javascript" src="dist/scripts.js"></script>
 
   <!-- metrics code -->

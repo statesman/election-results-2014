@@ -99,10 +99,21 @@ var gmap;
     gmap = map.gmap;
     set_race('rail', map);
 
+    $("#address").geocomplete({
+      map: map.gmap.map,
+      bounds: map.gmap.getBounds(),
+      types: ['address']
+    }).bind("geocode:result", function(e, result){
+      map.mark(result.geometry.location.k, result.geometry.location.B);
+    });
+
     $('#race').change(function() {
       set_race($(this).val(), map);
 
       var center = $(this).find(':selected').data('center');
+      if(typeof center !== "undefined") {
+        center = center.split(',');
+      }
       var zoom = $(this).find(':selected').data('zoom');
 
       map.focus(zoom, center);

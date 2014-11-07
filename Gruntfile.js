@@ -59,6 +59,7 @@ module.exports = function(grunt) {
         files: {
           'dist/scripts.js': [
             'bower_components/jquery/dist/jquery.js',
+            'bower_components/geocomplete/jquery.geocomplete.js',
             'bower_components/gmaps/gmaps.js',
             'bower_components/underscore/underscore.js',
             'bower_components/handlebars/handlebars.runtime.js',
