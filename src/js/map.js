@@ -63,9 +63,19 @@ var ElectionMap = (function($, GMaps, google){
       zIndex: 500,
       mouseover: function() {
         self.results.update(opts.resultsData);
+        this.setOptions({
+          strokeWeight: 4,
+          strokeOpacity: 0.75,
+          zIndex: 505
+        });
       },
       mouseout: function() {
         self.results.showDefault();
+        this.setOptions({
+          strokeWeight: 1,
+          strokeOpacity: 0.5,
+          zIndex: 500
+        });
       }
     });
   };
