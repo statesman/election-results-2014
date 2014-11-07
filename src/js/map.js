@@ -1,4 +1,4 @@
-var ElectionMap = (function(GMaps, google){
+var ElectionMap = (function($, GMaps, google){
 
   function ElectionMap(el, keyEl) {
     this.defaults = {
@@ -48,6 +48,89 @@ var ElectionMap = (function(GMaps, google){
     this.gmap.removeMarkers();
   };
 
+  ElectionMap.prototype.drawPrecinct = function(opts) {
+    var opacity = opts.opacity || 0.5,
+        self = this;
+
+    this.gmap.drawPolygon({
+      paths: opts.paths,
+      useGeoJSON: true,
+      strokeColor: '#fff',
+      strokeOpacity: 0.5,
+      strokeWeight: 1,
+      fillColor: opts.fill,
+      fillOpacity: opacity,
+      zIndex: 500,
+      mouseover: function() {
+        self.results.update(opts.resultsData);
+      },
+      mouseout: function() {
+        self.results.showDefault();
+      }
+    });
+  };
+
+  ElectionMap.prototype.preDraw = function() {
+    this.clear();
+
+    this.key = new Key('#key');
+    this.colors = new Palette(this.key);
+    this.results = new Results('#results');
+  };
+
+  ElectionMap.prototype.drawWinners = function(race) {
+    this.preDraw();
+    var self = this;
+
+    $.getJSON('race-data/' + race + '.json', function(data) {
+      _.each(data.features, function(feature) {
+        if(typeof feature.properties !== "undefined") {
+          this.drawPrecinct({
+            paths: feature.geometry.coordinates,
+            fill: this.colors.get(feature.properties.winner.candidate, feature.properties.winner.party),
+            resultsData: feature.properties
+          });
+        }
+      }, self);
+    });
+  };
+
+  ElectionMap.prototype.drawSupport = function(race, opt) {
+    this.preDraw();
+    var self = this;
+
+    var label = "";
+    if (opt === "For") {
+      label = "Votes for " + race;
+    }
+    else {
+      label = "Votes for " + opt;
+    }
+    label = label + " <small>(darker precincts indicate higher support)</small>";
+    var color = this.colors.get(opt, "", label);
+
+    $.getJSON('race-data/' + race + '.json', function(data) {
+      _.each(data.features, function(feature) {
+        if(typeof feature.properties !== "undefined") {
+          var votes_for = 0,
+              total_votes = 0;
+          _.each(feature.properties.races, function(option) {
+            if(option.candidate === opt) {
+              votes_for += option.votes;
+            }
+            total_votes += option.votes;
+          });
+          this.drawPrecinct({
+            paths: feature.geometry.coordinates,
+            fill: color,
+            opacity: (votes_for / total_votes) * 1.25,
+            resultsData: feature.properties
+          });
+        }
+      }, self);
+    });
+  };
+
   return ElectionMap;
 
-}(GMaps, google));
+}(jQuery, GMaps, google));

@@ -3,8 +3,8 @@ var Palette = (function() {
   function Palette(key) {
     this.key = key;
     this.colors = [
-      '#1E8A0E',
       '#1E44A8',
+      '#1E8A0E',
       '#FFCC00',
       '#FF6600',
       '#4D1979'
@@ -21,22 +21,22 @@ var Palette = (function() {
     this.key.reset();
   }
 
-  Palette.prototype.set = function(candidate, color) {
+  Palette.prototype.set = function(candidate, color, label) {
     this.candidates[candidate] = color;
     this.key.add({
       color: color,
-      label: candidate
+      label: label || candidate
     });
   };
 
-  Palette.prototype.get = function(candidate, party) {
+  Palette.prototype.get = function(candidate, party, label) {
     if(typeof this.candidates[candidate] === "undefined") {
       if(party === "") {
-        this.set(candidate, this.colors[this.nextColor]);
+        this.set(candidate, this.colors[this.nextColor], label);
         this.nextColor++;
       }
       else {
-        this.set(candidate, this.partycolors[party]);
+        this.set(candidate, this.partycolors[party], label);
       }
     }
     return this.candidates[candidate];
