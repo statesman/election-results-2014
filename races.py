@@ -1,5 +1,17 @@
 import csv, sys, simplejson
 
+def is_in_county(p):
+  """
+  Check if the precinct number has a letter prefix, which would mean it's
+  from another county.
+  """
+  try:
+    float(p[0:1])
+    return True
+  except ValueError:
+    return False
+
+
 def write_precinct_data(races, precinct, data):
   """
   Write the race data to the passed precinct data dict
@@ -48,12 +60,13 @@ def build_race_file(target_races, filename):
 
       # Pull our data from the CSV columns
       precinct = row[0]
+      in_county = is_in_county(precinct)
       candidate_name = row[2]
       total_votes = int(row[4])
       race = row[1]
       party = row[3]
 
-      if race in target_races:
+      if race in target_races and in_county:
 
         if current_precinct != precinct and current_precinct != None:
           if running_vote_total > 0:
@@ -142,14 +155,14 @@ build_race_file(["GOVERNOR", "Governor"], 'governor')
 build_race_file(["LIEUTENANT GOVERNOR", "Lieutenant Governor"], 'lt-governor')
 build_race_file(["ATTORNEY GENERAL", "Attorney General"], 'attorney-general')
 
-build_race_file(["MAYOR, CITY OF AUSTIN"], 'mayor')
-build_race_file(["PROPOSITION, CITY OF AUSTIN"], 'rail')
+build_race_file(["MAYOR, CITY OF AUSTIN", "Mayor, City of Austin"], 'mayor')
+build_race_file(["PROPOSITION, CITY OF AUSTIN", "Austin Prop 1 CITY OF AUSTIN FULL PURPOSE"], 'rail')
 build_race_file(["DISTRICT 1, AUSTIN CITY COUNCIL, CITY OF AUSTIN"], 'council-d1')
 build_race_file(["DISTRICT 2, AUSTIN CITY COUNCIL, CITY OF AUSTIN"], 'council-d2')
 build_race_file(["DISTRICT 3, AUSTIN CITY COUNCIL, CITY OF AUSTIN"], 'council-d3')
 build_race_file(["DISTRICT 4, AUSTIN CITY COUNCIL, CITY OF AUSTIN"], 'council-d4')
 build_race_file(["DISTRICT 5, AUSTIN CITY COUNCIL, CITY OF AUSTIN"], 'council-d5')
-build_race_file(["DISTRICT 6, AUSTIN CITY COUNCIL, CITY OF AUSTIN"], 'council-d6')
+build_race_file(["DISTRICT 6, AUSTIN CITY COUNCIL, CITY OF AUSTIN", "District 6, Austin City Council"], 'council-d6')
 build_race_file(["DISTRICT 7, AUSTIN CITY COUNCIL, CITY OF AUSTIN"], 'council-d7')
 build_race_file(["DISTRICT 8, AUSTIN CITY COUNCIL, CITY OF AUSTIN"], 'council-d8')
 build_race_file(["DISTRICT 9, AUSTIN CITY COUNCIL, CITY OF AUSTIN"], 'council-d9')
