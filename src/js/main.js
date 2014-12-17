@@ -24,8 +24,7 @@
   $(function() {
 
     var map = new ElectionMap('#map');
-    map.drawSupport("rail", "For");
-    addRailLine(map);
+    map.drawWinners("mayor-runoff");
 
     $("#address").geocomplete({
       map: map.gmap.map,

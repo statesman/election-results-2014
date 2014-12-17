@@ -28,7 +28,12 @@ var Results = (function($, JST, _, numeral) {
     });
     // Run through again and add percentages, format votes
     _.each(data.races, function(race) {
-      race.share = numeral(race.votes / total_votes).format('0 %');
+      if(total_votes !== 0) {
+        race.share = numeral(race.votes / total_votes).format('0 %');
+      }
+      else {
+        race.share = '-';
+      }
       race.votes_str = numeral(race.votes).format('0,0');
     });
     // Format demographic data

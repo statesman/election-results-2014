@@ -51,10 +51,10 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 header">
-        <h4>2014 general election</h4>
+        <h4>2014 elections</h4>
         <h2 class="page-title">Travis and Williamson county precinct-by-precinct results</h2>
         <p><small>Interactive by Andrew Chavez and Christian McDonald, Austin American-Statesman</small></p>
-        <p>Use the dropdown to see the highest vote-getter in a race for each Travis and Williamson county precinct in the Nov. 4 general election. Roll your cursor over each precinct on the map to see votes for all candidates in the selected race. Hover over a candidate's name in the map legend to see his or her support in each precinct. For full results, go to <a href="http://statesman.com/electionresults" target="_blank">statesman.com/electionresults</a></p>
+        <p>Use the dropdown to see the highest vote-getter in a race for each Travis and Williamson county precinct in the Nov. 4 general election and the Dec. 17 runoff election. Roll your cursor over each precinct on the map to see votes for all candidates in the selected race. Hover over a candidate's name in the map legend to see his or her support in each precinct. For full results, go to <a href="http://statesman.com/electionresults" target="_blank">statesman.com/electionresults</a></p>
       </div>
 
       <div class="form-group clearfix">
@@ -94,7 +94,7 @@
             </optgroup>
             <optgroup label="City of Austin races">
               <option value="mayor">Austin Mayor</option>
-              <option selected value="rail">Urban rail</option>
+              <option value="rail">Urban rail</option>
               <option value="council-d1" data-center="30.311964485472895,-97.63481521606447">Austin City Council, District 1</option>
               <option value="council-d2" data-zoom="1" data-center="30.17078274487305,-97.65404129028322">Austin City Council, District 2</option>
               <option value="council-d3" data-zoom="1" data-center="30.217668074920706,-97.68991851806642">Austin City Council, District 3</option>
@@ -105,6 +105,16 @@
               <option value="council-d8" data-zoom="1" data-center="30.243178552369244,-97.85780334472658">Austin City Council, District 8</option>
               <option value="council-d9" data-zoom="2" data-center="30.271944052881455,-97.73489379882814">Austin City Council, District 9</option>
               <option value="council-d10" data-zoom="1" data-center="30.35137604801479,-97.7984085083008">Austin City Council, District 10</option>
+            </optgroup>
+            <optgroup label="City of Austin races - runoff">
+              <option selected value="mayor-runoff">Austin Mayor - runoff</option>
+              <option value="council-d1-runoff" data-center="30.311964485472895,-97.63481521606447">Austin City Council, District 1 - runoff</option>
+              <option value="council-d3-runoff" data-zoom="1" data-center="30.217668074920706,-97.68991851806642">Austin City Council, District 3 - runoff</option>
+              <option value="council-d4-runoff" data-zoom="1" data-center="30.347820768633277,-97.70193481445314">Austin City Council, District 4 - runoff</option>
+              <option value="council-d6-runoff" data-zoom="1" data-center="30.404393625935764,-97.83583068847658">Austin City Council, District 6 - runoff</option>
+              <option value="council-d7-runoff" data-zoom="1" data-center="30.383663919043997,-97.69541168212892">Austin City Council, District 7 - runoff</option>
+              <option value="council-d8-runoff" data-zoom="1" data-center="30.243178552369244,-97.85780334472658">Austin City Council, District 8 - runoff</option>
+              <option value="council-d10-runoff" data-zoom="1" data-center="30.35137604801479,-97.7984085083008">Austin City Council, District 10 - runoff</option>
             </optgroup>
           </select>
         </div>
